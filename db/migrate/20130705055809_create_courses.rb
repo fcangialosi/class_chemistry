@@ -8,12 +8,11 @@ class CreateCourses < ActiveRecord::Migration
       t.string "course_code" # CMSC250
       t.string "name" # Discrete Structures
       t.integer "credits" # 4
-      t.string "professor" # Clyde Kruskal, Tom Reinhardt (limit to first 2?)
-      t.text "description" # The main paragraph of text describing the course, not anything about requirements or other offerings
-      # seat information stored in sections database for now...
-      t.boolean "perm_req", :default => false # whether or not permission is required to sign up
-      t.text "prereq" # list of prerequisites "Must have math eligiblity of MATH220..."
-      t.text "restriction" # list of any other restrictions required to sign up
+      # t.string "professor" # Clyde Kruskal, (just the first for now) - having trouble
+      t.text "description" # The main paragraph of text describing the course, including requirements and prereqs, for now
+      # t.boolean "perm_req", :default => false # whether or not permission is required to sign up
+      #t.text "prereq" # list of prerequisites "Must have math eligiblity of MATH220..."
+      #t.text "restriction" # list of any other restrictions required to sign up
       t.timestamps
     end
     add_index("courses","course_code")
@@ -30,11 +29,11 @@ class CreateCourses < ActiveRecord::Migration
       t.boolean "dshu", :default => false
       t.boolean "dsns", :default => false
       t.boolean "dsnl", :default => false
-	  t.boolean "dssp", :default => false
-	  t.boolean "dvcc", :default => false
-	  t.boolean "dvup", :default => false
-	  t.boolean "scis", :default => false
-	  t.timestamps
+	    t.boolean "dssp", :default => false
+	    t.boolean "dvcc", :default => false
+	    t.boolean "dvup", :default => false
+	    t.boolean "scis", :default => false
+	    t.timestamps
     end
     add_index("genedtypes","course_id")
 

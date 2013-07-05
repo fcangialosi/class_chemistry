@@ -18,5 +18,5 @@
 #
 
 class Course < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_accessible :department, :course_num, :course_code, :name, :credits, :description
 end

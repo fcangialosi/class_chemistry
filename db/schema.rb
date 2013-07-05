@@ -19,13 +19,9 @@ ActiveRecord::Schema.define(:version => 20130705063400) do
     t.string   "course_code"
     t.string   "name"
     t.integer  "credits"
-    t.string   "professor"
     t.text     "description"
-    t.boolean  "perm_req",    :default => false
-    t.text     "prereq"
-    t.text     "restriction"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   add_index "courses", ["course_code"], :name => "index_courses_on_course_code"
