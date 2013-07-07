@@ -13,3 +13,6 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore any HTML pages downloaded to be used for seeding
+/db/classpages/*.html
