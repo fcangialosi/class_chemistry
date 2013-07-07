@@ -9,9 +9,11 @@ class CreateCourses < ActiveRecord::Migration
       t.string "name" # Discrete Structures
       t.integer "credits" # 4
       t.text "description" # The main paragraph of text describing the course, including requirements and prereqs, for now
-      # t.boolean "perm_req", :default => false # whether or not permission is required to sign up
-      #t.text "prereq" # list of prerequisites "Must have math eligiblity of MATH220..."
-      #t.text "restriction" # list of any other restrictions required to sign up
+      t.integer "total_seats" # total seats of all sections, added from sections table
+      t.integer "open_seats" # total number of open seats from all sections, added from sections table
+      t.string "professor" # only the first professor listed
+      t.integer "num_professors" # the number of total professors, e.g. "Professors: Clyde Kruskal and 5 others..."
+      t.boolean "undergrad", :default => true # whether or not a course is an undergraduate course 
 
       # add gened types
       t.boolean "FSAW", :default => false
@@ -38,5 +40,4 @@ class CreateCourses < ActiveRecord::Migration
     end
     add_index("courses","course_code")
  end  
-
 end

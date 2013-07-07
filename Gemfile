@@ -27,7 +27,6 @@ group :development do
 end
 
 gem 'nokogiri'
-
 gem 'logger'
 
 # To use ActiveModel has_secure_password
