@@ -8,51 +8,35 @@ class CreateCourses < ActiveRecord::Migration
       t.string "course_code" # CMSC250
       t.string "name" # Discrete Structures
       t.integer "credits" # 4
-      # t.string "professor" # Clyde Kruskal, (just the first for now) - having trouble
       t.text "description" # The main paragraph of text describing the course, including requirements and prereqs, for now
       # t.boolean "perm_req", :default => false # whether or not permission is required to sign up
       #t.text "prereq" # list of prerequisites "Must have math eligiblity of MATH220..."
       #t.text "restriction" # list of any other restrictions required to sign up
+
+      # add gened types
+      t.boolean "FSAW", :default => false
+      t.boolean "FSAR", :default => false
+      t.boolean "FSMA", :default => false
+      t.boolean "FSOC", :default => false
+      t.boolean "FSPW", :default => false
+      t.boolean "DSHS", :default => false
+      t.boolean "DSHU", :default => false
+      t.boolean "DSNS", :default => false
+      t.boolean "DSNL", :default => false
+      t.boolean "DSSP", :default => false
+      t.boolean "DVCC", :default => false
+      t.boolean "DVUP", :default => false
+      t.boolean "SCIS", :default => false
+      t.boolean "HSorHU", :default => false
+      t.boolean "HSorSP", :default => false
+      t.boolean "HSorNS", :default => false
+      t.boolean "HUorSP", :default => false
+      t.boolean "NLorSP", :default => false
+      t.boolean "HSorHUorSP", :default => false
+      t.boolean "NLorNSorSP", :default => false
       t.timestamps
     end
     add_index("courses","course_code")
-
-    # Create and index table relating Gen Ed codes to each course
-    create_table :genedtypes do |t|
-      t.integer "course_id" # relation to course
-      t.boolean "fsaw", :default => false
-      t.boolean "fsar", :default => false
-      t.boolean "fsma", :default => false
-      t.boolean "fsoc", :default => false
-      t.boolean "fspw", :default => false
-      t.boolean "dshs", :default => false
-      t.boolean "dshu", :default => false
-      t.boolean "dsns", :default => false
-      t.boolean "dsnl", :default => false
-	    t.boolean "dssp", :default => false
-	    t.boolean "dvcc", :default => false
-	    t.boolean "dvup", :default => false
-	    t.boolean "scis", :default => false
-	    t.timestamps
-    end
-    add_index("genedtypes","course_id")
-
-  # Create and index table relating all the "overall" OurUMD data to each course
-    create_table :ourumddata do |t|
-  	  t.integer "course_id" # relation to course
-  	  t.text "graph_url" # way to access the image for the bar graph visualizing percentage data
-      t.float "gpa" # overall GPA
-      t.integer "perc_a" # percentage of A's overall
-      t.integer "perc_b"
-      t.integer "perc_c"
-      t.integer "perc_d"
-      t.integer "perc_f"
-      t.integer "num_students" # number of students that these records apply for 
-      t.integer "num_sections" 
-      t.integer "num_semesters" 
-      t.timestamps
-    end
-    add_index("ourumddata","course_id")
  end  
 
 end

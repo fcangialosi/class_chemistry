@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130705063400) do
+ActiveRecord::Schema.define(:version => 20130706151303) do
 
   create_table "courses", :force => true do |t|
     t.string   "department"
@@ -20,34 +20,33 @@ ActiveRecord::Schema.define(:version => 20130705063400) do
     t.string   "name"
     t.integer  "credits"
     t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.boolean  "FSAW",        :default => false
+    t.boolean  "FSAR",        :default => false
+    t.boolean  "FSMA",        :default => false
+    t.boolean  "FSOC",        :default => false
+    t.boolean  "FSPW",        :default => false
+    t.boolean  "DSHS",        :default => false
+    t.boolean  "DSHU",        :default => false
+    t.boolean  "DSNS",        :default => false
+    t.boolean  "DSNL",        :default => false
+    t.boolean  "DSSP",        :default => false
+    t.boolean  "DVCC",        :default => false
+    t.boolean  "DVUP",        :default => false
+    t.boolean  "SCIS",        :default => false
+    t.boolean  "HSorHU",      :default => false
+    t.boolean  "HSorSP",      :default => false
+    t.boolean  "HSorNS",      :default => false
+    t.boolean  "HUorSP",      :default => false
+    t.boolean  "NLorSP",      :default => false
+    t.boolean  "HSorHUorSP",  :default => false
+    t.boolean  "NLorNSorSP",  :default => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   add_index "courses", ["course_code"], :name => "index_courses_on_course_code"
 
-  create_table "genedtypes", :force => true do |t|
-    t.integer  "course_id"
-    t.boolean  "fsaw",       :default => false
-    t.boolean  "fsar",       :default => false
-    t.boolean  "fsma",       :default => false
-    t.boolean  "fsoc",       :default => false
-    t.boolean  "fspw",       :default => false
-    t.boolean  "dshs",       :default => false
-    t.boolean  "dshu",       :default => false
-    t.boolean  "dsns",       :default => false
-    t.boolean  "dsnl",       :default => false
-    t.boolean  "dssp",       :default => false
-    t.boolean  "dvcc",       :default => false
-    t.boolean  "dvup",       :default => false
-    t.boolean  "scis",       :default => false
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-  end
-
-  add_index "genedtypes", ["course_id"], :name => "index_genedtypes_on_course_id"
-
-  create_table "ourumddata", :force => true do |t|
+  create_table "ourumds", :force => true do |t|
     t.integer  "course_id"
     t.text     "graph_url"
     t.float    "gpa"
@@ -63,7 +62,7 @@ ActiveRecord::Schema.define(:version => 20130705063400) do
     t.datetime "updated_at",    :null => false
   end
 
-  add_index "ourumddata", ["course_id"], :name => "index_ourumddata_on_course_id"
+  add_index "ourumds", ["course_id"], :name => "index_ourumds_on_course_id"
 
   create_table "sections", :force => true do |t|
     t.integer  "course_id"

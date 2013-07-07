@@ -18,5 +18,5 @@
 #
 
 class Course < ActiveRecord::Base
-  attr_accessible :department, :course_num, :course_code, :name, :credits, :description
+  attr_accessible :department, :course_num, :course_code, :name, :credits, :description, :graduate, :FSAW, :FSAR, :FSMA, :FSOC, :FSPW, :DSHS, :DSHU, :DSNS, :DSNL, :DSSP, :DVCC, :DVUP, :SCIS, :HSorHU, :HSorSP, :HSorNS, :HUorSP, :NLorSP, :HSorHUorSP, :NLorNSorSP
 end

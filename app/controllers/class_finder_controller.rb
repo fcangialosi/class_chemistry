@@ -1,7 +1,11 @@
 class ClassFinderController < ApplicationController
   
-   def index
-  	@courses = Course.limit(20)
+  def index
+  	@courses = []
+  	10.times do |x|
+  	  @courses.push(Course.offset(rand(Course.count)).first)
+  	end
+   
   end
 
 end
