@@ -1,5 +1,4 @@
 class CreateCourses < ActiveRecord::Migration
-
   def change
     # Create table to store basic information about each course
     create_table :courses do |t|
@@ -39,5 +38,5 @@ class CreateCourses < ActiveRecord::Migration
       t.timestamps
     end
     add_index("courses","course_code")
- end  
+ end 
 end

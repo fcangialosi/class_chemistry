@@ -1,9 +1,9 @@
-class CreateSections < ActiveRecord::Migration
-  
+class CreateSections < ActiveRecord::Migration  
   def change
     create_table :sections do |t|
-      t.integer "course_code" 
-      t.integer "section_num" # 0101 
+      t.string "identifier" # "0101CMSC132"
+      t.string "course_code" 
+      t.string "section_num" # 0101 
       t.string "professor"
       t.integer "seats_total"
       t.integer "seats_open"
@@ -30,7 +30,7 @@ class CreateSections < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index("sections", "course_id")
-
+    add_index("sections", "identifier")
+    add_index("sections", "course_code")
   end
 end

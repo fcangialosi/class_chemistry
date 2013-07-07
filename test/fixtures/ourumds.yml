@@ -3,7 +3,7 @@
 # Table name: ourumds
 #
 #  id            :integer          not null, primary key
-#  course_id     :integer
+#  course_code   :string(255)
 #  graph_url     :text
 #  gpa           :float
 #  perc_a_plus   :integer

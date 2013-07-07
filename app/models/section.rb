@@ -3,8 +3,9 @@
 # Table name: sections
 #
 #  id                  :integer          not null, primary key
-#  course_id           :integer
-#  section_num         :integer
+#  identifier          :string(255)
+#  course_code         :string(255)
+#  section_num         :string(255)
 #  professor           :string(255)
 #  seats_total         :integer
 #  seats_open          :integer
@@ -27,5 +28,5 @@
 #
 
 class Section < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_accessible :identifier, :course_code, :section_num, :professor, :seats_total, :seats_open, :seats_waitlist, :lecture_days, :lecture_start, :lecture_end, :lecture_building, :lecture_room, :has_discussion, :disc_days, :disc_start, :disc_end, :disc_building, :disc_room
 end

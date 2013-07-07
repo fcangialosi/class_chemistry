@@ -6,9 +6,83 @@
 
 	log = Logger.new('seeding_log.txt')
 
-	gened = ["FSAW", "FSAR", "FSMA", "FSOC", "FSPW", "DSHS", "DSHU", "DSNS", "DSNL", "DSSP", "DVCC", "DVUP", "SCIS"]
+	doc = Nokogiri::HTML(open("https://ntst.umd.edu/soc/index.html?term=201308"))
+	departments = doc.css("span.prefix-abbrev").map {|e| "#{strip(e.text)}"}
+	departments.push("FSAW", "FSAR", "FSMA", "FSOC", "FSPW", "DSHS", "DSHU", "DSNS", "DSNL", "DSSP", "DVCC", "DVUP", "SCIS")
 
-	gened.each do |page| 
+	departments.each do |page|
+
+		log.info("Parsing and storing section info for #{page} classes...")
+		puts "Parsing and storing section info for #{page} classes..."
+
+		f = File.open("./db/classpages/#{page}.html")
+	  	doc = Nokogiri::HTML(open(f))
+	  	f.close
+
+	  	courses = doc.css("div.course").map {|e| e} # divide into an array of the separate HTML for each section
+
+	  	courses.each do |course|
+	  		course_name = strip(course.css("div.course-id").text) # CMSC250
+	  		sections = course.css("div.section").map {|e| e} # make array of the HTML for each section in this class
+
+	  		sections.each do |s|
+	  			section_code = strip(s.css("span.section-id").text) # 0101
+	  			section = Section.find_or_create_by_identifier("#{section_code+course_name}") # looks like 0101CMSC250
+
+	  			professor = strip(s.css("span.section-instructor").text)
+	  			total = strip(s.css("span.total-seats-count").text).to_i
+	  			open = strip(s.css("span.open-seats-count").text).to_i
+				waitlist = strip(s.css("span.watlist-count").text).to_i
+
+				rows = s.css("div.row").map {|e| e} # each line of a section box is a row
+
+				# the second row has information about the lecture (the first has section num and seats)
+				days = rows[1].css("span.section-days").text
+				start_time = rows[1].css("span.class-start-time").text
+				end_time = rows[1].css("span.class-end-time").text
+				building = rows[1].css("span.building-code").text
+				room = rows[1].css("span.class-room").text
+
+	  			section.update_attributes(
+	  				:course_code => course_name,
+	  				:section_num => section_code,
+	  				:professor => professor,
+	  				:seats_total => total,
+	  				:seats_open => open,
+	  				:seats_waitlist => waitlist,
+
+	  				:lecture_days => days,
+	  				:lecture_start => start_time,
+	  				:lecture_end => end_time,
+	  				:lecture_building => building,
+	  				:lecture_room => room
+	  			)
+
+	  			# if there is a third row, then the section has a discussion, and the row contains this info
+	  			if(rows.size == 3)
+	  				days = rows[2].css("span.section-days").text
+					start_time = rows[2].css("span.class-start-time").text
+					end_time = rows[2].css("span.class-end-time").text
+					building = rows[2].css("span.building-code").text
+					room = rows[2].css("span.class-room").text
+	  				section.update_attributes(
+	  					:has_discussion => true,
+	  					:disc_days => days,
+	  					:disc_start => start_time,
+	  					:disc_end => end_time,
+	  					:disc_building => building,
+	  					:disc_room => room
+	  				)	
+	  			end
+	  		end
+	  	end
+
+	  	log.info("#{page} page completed.\n")
+	  	puts "#{page} page completed.\n"
+	end
+
+=begin
+gened.each do |page| 
 
 	  log.info("Parsing and storing classes from #{page} GenEd page...")
 	  puts "Parsing and storing classes from #{page} GenEd page..."
@@ -128,9 +202,6 @@
 	log.info("=====GenEd parsing complete!=====\n Now the rest...")
 	puts "=====GenEd parsing complete!=====\n Now the rest..."
 
-	doc = Nokogiri::HTML(open("https://ntst.umd.edu/soc/index.html?term=201308"))
-	departments = doc.css("span.prefix-abbrev").map {|e| "#{strip(e.text)}"}
-
 	departments.each do |page|
 
 	  log.info("Parsing and storing classes from #{page} page...")
@@ -153,3 +224,4 @@
 
 	log.info("=====All parsing complete!=====")
 	puts "=====All parsing complete!====="
+=end

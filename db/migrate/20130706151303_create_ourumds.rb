@@ -2,7 +2,7 @@ class CreateOurumds < ActiveRecord::Migration
   def change
    # Create and index table relating all the "overall" OurUMD data to each course
     create_table :ourumds do |t|
-  	  t.integer "course_code" # relation to course
+  	  t.string "course_code" # relation to course
   	  t.text "graph_url" # way to access the image for the bar graph visualizing percentage data
       t.float "gpa" # overall GPA
 
@@ -27,6 +27,6 @@ class CreateOurumds < ActiveRecord::Migration
       t.integer "num_semesters" 
       t.timestamps
     end
-    add_index("ourumds","course_id")
+    add_index("ourumds","course_code")
   end
 end

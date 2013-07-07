@@ -23,7 +23,7 @@ departments.each do |page|
     sleep(2) # Wait for them to load
 	browser.div(:class => "sections-container").click # Make sure sections have loaded
 	puts "Downloading HTML file..."
-    file = File.open("#{page}.html", 'w')
+    file = File.open("./classpages/#{page}.html", 'w')
     file.puts browser.html
     file.close
     puts "=====File downloaded!====="

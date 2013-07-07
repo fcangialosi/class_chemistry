@@ -3,8 +3,9 @@
 # Table name: sections
 #
 #  id                  :integer          not null, primary key
-#  course_id           :integer
-#  section_num         :integer
+#  identifier          :string(255)
+#  course_code         :string(255)
+#  section_num         :string(255)
 #  professor           :string(255)
 #  seats_total         :integer
 #  seats_open          :integer
