@@ -16,11 +16,11 @@ departments.each do |page|
   
   puts "Opening #{page} page..."
   browser.goto "https://ntst.umd.edu/soc/courses.html?term=201308&prefix=#{page}"
-  browser.button(:value => "Show All Sections").click
-  puts "Loading sections..."
-  sleep(2)
-
+  
   begin 
+  	browser.button(:value => "Show All Sections").click # Expose sections
+    puts "Loading sections..."
+    sleep(2) # Wait for them to load
 	browser.div(:class => "sections-container").click # Make sure sections have loaded
 	puts "Downloading HTML file..."
     file = File.open("#{page}.html", 'w')
@@ -39,5 +39,3 @@ else
 	puts "Fishpaste! The following pages were not able to be downloaded...#{failed_list}"
 end
 browser.close
-
-
