@@ -14,7 +14,9 @@
 	  puts "Parsing and storing classes from #{page} GenEd page..."
 
 	  # Which page to parse
-	  doc = Nokogiri::HTML(open("https://ntst.umd.edu/soc/gen-ed-courses.html?term=201308&gen-ed-code=#{page}"))
+	  f = File.open("./db/classpages/#{page}.html")
+	  doc = Nokogiri::HTML(open(f))
+	  f.close
 
 	  title = doc.css('span.course-title').map { |e| "#{e.text}" }
 	  id = doc.css('div.course-id').map { |e| "#{e.text}" }
@@ -25,6 +27,39 @@
 	  title.size.times do |x|
 	    course = Course.find_or_create_by_course_code("#{id[x]}")
 		course.update_attributes(department: "#{id[x][0..3]}", course_num: "#{id[x][4..6]}", course_code: "#{id[x]}", name: "#{title[x]}", credits: credits[x].to_i, description: "#{description[x]}") 
+		
+		# Calculate total number of seats from all sections
+		sections = Section.find_by_course_code("#{id[x]}")
+		open = 0
+		total = 0
+		sections.each do |s|
+		  open += s.seats_open
+		  total += s.seats_total
+		end
+		# Find the number of unique professor names among all sections of this class
+		professors = []
+		num_professors = 0
+		sections.each do |s|
+		  if !professors.include?(s.professor)
+		  	num_professors+=1
+		  	professors.push s.professor
+		  end
+		end
+		# Remove all TBA instructors from the list now that we know how many there are, to be able to find the first real one
+		professors.each do |p|
+			if p.equals?("Instructor: TBA")
+				professors.delete(p)
+			end
+		end
+		# Just incase all were TBA, lets add one back
+		professors.push("Instructor: TBA")
+		
+		# Add the numer of seats, professors, and the name of the first non-null professor listed 
+		course.update_attributes(:open_seats => open, :total_seats => total, :num_professors => num_professors, :professor => professors[0])
+
+		# all classes default to undergrad, only change to grad if course num is greater than 499
+		if id[x][0..3].to_i > 499
+			course.update_attributes(:undergrad => false)
 
 	  	# set appropriate gened code filters
 	  	if gened[x].include? 'FSAW'
@@ -101,7 +136,9 @@
 	  log.info("Parsing and storing classes from #{page} page...")
 	  puts "Parsing and storing classes from #{page} page..."
 
-	  doc = Nokogiri::HTML(open("https://ntst.umd.edu/soc/courses.html?term=201308&prefix=#{page}"))
+	  f = File.open("./db/classpages/#{page}.html")
+	  doc = Nokogiri::HTML(open(f))
+	  f.close
 
 	  title = doc.css('span.course-title').map { |e| "#{e.text}" }
 	  id = doc.css('div.course-id').map { |e| "#{e.text}" }

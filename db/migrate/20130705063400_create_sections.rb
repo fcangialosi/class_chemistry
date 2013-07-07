@@ -2,7 +2,7 @@ class CreateSections < ActiveRecord::Migration
   
   def change
     create_table :sections do |t|
-      t.integer "course_id" # primary key in courses DB
+      t.integer "course_code" 
       t.integer "section_num" # 0101 
       t.string "professor"
       t.integer "seats_total"

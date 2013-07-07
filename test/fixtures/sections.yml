@@ -9,13 +9,19 @@
 #  seats_total         :integer
 #  seats_open          :integer
 #  seats_waitlist      :integer
+#  lecture_days        :string(255)
+#  lecture_start       :time
+#  lecture_end         :time
 #  lecture_building    :string(255)
 #  lecture_room        :integer
-#  lecture_times       :string(255)
-#  discussion_building :string(255)
-#  discussion_room     :integer
-#  discussion_times    :string(255)
+#  has_discussion      :boolean          default(FALSE)
+#  disc_days           :string(255)
+#  disc_start          :time
+#  disc_end            :time
+#  disc_building       :string(255)
+#  disc_room           :integer
 #  freshman_connection :boolean          default(FALSE)
+#  sci_evening         :boolean          default(FALSE)
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #
