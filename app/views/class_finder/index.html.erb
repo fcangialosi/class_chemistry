@@ -21,17 +21,18 @@
 	<h1 align="center">Class Chemistry</h1>
 <div id="container" class="clickable clearfix">
     
-          <% @courses.each do |course| %>
+          <% @courses.size.times do |x| %>
 
-<div class="element noble-gas nonmetal   " data-symbol="H" data-category="noble-gas">
-      <p class="number"><%= course.course_num%></p>
-      <h3 class="symbol"><%= course.department%></h3>
-      <h2 class="name"><%= course.name%></h2>
+<div class='<%= @types[x] %>'   data-symbol="H" data-category="noble-gas">
+      <p class="number"><%= @courses[x].course_num%></p>
+      <h3 class="symbol"><%= @courses[x].department%></h3>
+      <h2 class="name"><%= @courses[x].name%></h2>
       <span id="class_info"> </span>
 
-      <p class="seats">Seats Open: (<%=course.open_seats%>/<%=course.total_seats%>)</p>
+      <p class="seats">Seats Open: (<%=@courses[x].open_seats%>/<%=@courses[x].total_seats%>)</p>
      
     </div>
+
 
 <% end %>
     
