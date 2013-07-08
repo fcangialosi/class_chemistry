@@ -4,7 +4,7 @@
 <head>
   <link href='http://fonts.googleapis.com/css?family=Quicksand|Open+Sans:400,600' rel='stylesheet' type='text/css'>
   <meta charset="utf-8" />
-  <title>Class Finder &middot; Isotope</title>
+  <title>Class Chemistry &middot; Isotope</title>
   
   <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
@@ -18,7 +18,7 @@
 </head>
 <body class="demos ">
 
-	<h1 align="center">Class Finder</h1>
+	<h1 align="center">Class Chemistry</h1>
 <div id="container" class="clickable clearfix">
     
           <% @courses.each do |course| %>
@@ -191,14 +191,13 @@
           $container.isotope( options );
         }
       }
-
-
     
-      // change size of clicked element
+      // change size of clicked element, return all others to normal, so only one can be open at a time
       $container.delegate( '.element', 'click', function(){
+        atoms = $container.data('isotope').$filteredAtoms
+        atoms.removeClass('large')
         $(this).toggleClass('large');
-        $('#class_info').toggle();
-        $('#class_info').html(""); // Maybe this is where onclick event goes to add stuff to larger box??
+        //$('#class_info').toggle();
         $container.isotope('reLayout');
         
       });
