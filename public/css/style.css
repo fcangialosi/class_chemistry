@@ -90,7 +90,8 @@ footer, header, hgroup, menu, nav, section {
 
 body {
   padding: 20px;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Arial, sans-serif;
+  /*font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Arial, sans-serif;*/
+  font-family: 'Quicksand', sans-serif;
   font-size: 13px;
   line-height: 1.7em;
   background: #1F1E1D;
@@ -103,7 +104,8 @@ h1, h2, h3, p, ul, ol, pre, dl {
 
 h1, h2, #super-list, .element, .tagline, #index-list, 
 .super-list .link {
-  font-family: 'Helvetica Neue', Arial, sans-serif;
+  /*font-family: 'Helvetica Neue', Arial, sans-serif;*/
+  font-family: 'Quicksand', sans-serif;
 }
 
 h1, h2, h3 { font-weight: bold; }
@@ -160,23 +162,28 @@ body {
 }
 
 #container {
-  border: 1px solid #666;
+  /*border: 1px solid #666; removed border*/
   padding: 5px;
   margin-bottom: 20px;
+  margin-left:auto; /* Center container on page */
+  margin-right:auto;
 }
 
 .element {
   width: 200px;
   height: 200px;
   margin: 5px;
-  float: left;
+  float: center;
   overflow: hidden;
   position: relative;
   background: #888;
   color: #222;
-  -webkit-border-top-right-radius: 1.2em;
-      -moz-border-radius-topright: 1.2em;
-          border-top-right-radius: 1.2em;
+  -webkit-border-top-right-radius: 1.4em;
+      -moz-border-radius-topright: 1.4em;
+          border-top-right-radius: 1.4em;
+  -webkit-border-bottom-left-radius: 1.4em;
+      -moz-border-radius-bottomleft: 1.4em;
+          border-bottom-left-radius: 1.4em;
 }
 
 .element.alkali          { background: #F00; background: hsl(   0, 100%, 50%); }
@@ -226,7 +233,7 @@ body {
 
 .element .seats {
   font-size: 0.9em;
-  right: 0.5em;
+  left: 0.5em;
   bottom: 0.5em;
   font-weight: bold;
 }
@@ -246,7 +253,8 @@ body {
   color: #222;
   top: 7.0em;
   left: 0.5em;
-  font-family: 'Alegreya', serif;
+  /*font-family: 'Alegreya', serif;*/
+  font-family: 'Quicksand', sans-serif;
 }
 
 
@@ -262,8 +270,8 @@ body {
 .variable-sizes .element.large,
 .variable-sizes .element.large.width2.height2 {
   font-size: 1.0em;
-  width: 380px;
-  height: 450px;
+  width: 409px;
+  height: 409px;
   z-index: 100;
 }
 
