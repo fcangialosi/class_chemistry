@@ -12,8 +12,6 @@
   <link href='http://fonts.googleapis.com/css?family=Fauna+One|Alegreya' rel='stylesheet' type='text/css'>
   
   <!-- scripts at bottom of page -->
-  
-  <script src="http://desandro.com/mint/?script"></script> <!-- analytics -->
 
 </head>
 <body class="demos ">
@@ -23,12 +21,11 @@
     
           <% @courses.size.times do |x| %>
 
-<div class='<%= @types[x] %>'   data-symbol="H" data-category="noble-gas">
+<div class='<%= @types[x] %>' id = '<%=@courses[x].course_code%>' data-category="noble-gas">
       <p class="number"><%= @courses[x].course_code[4..-1]%></p>
       <h3 class="symbol"><%= @courses[x].department%></h3>
       <h2 class="name"><%= @courses[x].name%></h2>
-      <span id="class_info"> </span>
-
+      <span hidden id="<%=@courses[x].course_code%>-info" class ="description"> <%=@courses[x].description%> </span>
       <p class="seats">Seats Open: (<%=open = @courses[x].open_seats %><%= if(open == nil) then "N" end%>/<%=total = @courses[x].total_seats%><%= if(total ==nil) then "A" end%>)</p>
      
     </div>
@@ -196,9 +193,15 @@
       // change size of clicked element, return all others to normal, so only one can be open at a time
       $container.delegate( '.element', 'click', function(){
         atoms = $container.data('isotope').$filteredAtoms
+        
         atoms.removeClass('large')
         $(this).toggleClass('large');
-        //$('#class_info').toggle();
+        console.log()
+        descs = document.getElementsByClassName("description");
+        for(var i=0; i < descs.length; i++){descs[i].setAttribute('hidden')}
+        atom_id = $(this).context.id
+        document.getElementById(atom_id+"-info").removeAttribute('hidden');
+
         $container.isotope('reLayout');
         
       });
