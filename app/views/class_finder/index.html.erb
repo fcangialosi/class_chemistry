@@ -31,52 +31,73 @@
     </div>
 
 
-<% end %>
-    
-    
-          
-    <div class="element alkaline-earth metal   " data-symbol="He" data-category="alkaline-earth">
-      <p class="number">110</p>
-      <h3 class="symbol">GEOG</h3>
-      <h2 class="name">The World Today: Global Perspectives</h2>
-      <p class="weight">Credits: 1</p>
-      <p class="seats">Seats Open: 22</p>
-    </div>
-    
-          
-    <div class="element alkali metal   " data-symbol="Li" data-category="alkali">
-      <p class="number">270</p>
-      <h3 class="symbol">CMLT</h3>
-      <h2 class="name">Global Literature and Social Change</h2>
-      <p class="weight">Credits: 3</p>
-      <p class="seats">Seats Open: 0</p>
-    </div>
-    
-          
-    <div class="element halogen nonmetal   " data-symbol="Be" data-category="halogen">
-      <p class="number">340</p>
-      <h3 class="symbol">MATH</h3>
-      <h2 class="name">Multivariable Calculus, Linear Algebra and Differential Equations I (Honors)</h2>
-      <p class="weight">Credits: 4</p>
-      <p class="seats">Seats Open: 120</p>
-    </div>
-    
-          
-    <div class="element metalloid   " data-symbol="B" data-category="metalloid">
-      <p class="number">246</p>
-      <h3 class="symbol">MATH</h3>
-      <h2 class="name">Differential Equations</h2>
-      <p class="weight">Credits: 4</p>
-      <p class="seats">Seats Open: 295</p>
-    </div>
-    
-    
+<% end %>  
   </div> <!-- #container -->
   
   <script src="./js/jquery-1.7.1.min.js"></script>
 
   <script src="./js/jquery.isotope.min.js"></script>
   <script src="./js/fake-element.js"></script>
+  <script type="text/javascript">
+$.Isotope.prototype._getCenteredMasonryColumns = function() {
+
+    this.width = this.element.width();
+
+    var parentWidth = this.element.parent().width();
+
+    var colW = this.options.masonry && this.options.masonry.columnWidth || // i.e. options.masonry && options.masonry.columnWidth
+
+    this.$filteredAtoms.outerWidth(true) || // or use the size of the first item
+
+    parentWidth; // if there's no items, use size of container
+
+    var cols = Math.floor(parentWidth / colW);
+
+    cols = Math.max(cols, 1);
+
+    this.masonry.cols = cols; // i.e. this.masonry.cols = ....
+    this.masonry.columnWidth = colW; // i.e. this.masonry.columnWidth = ...
+};
+
+$.Isotope.prototype._masonryReset = function() {
+
+    this.masonry = {}; // layout-specific props
+    this._getCenteredMasonryColumns(); // FIXME shouldn't have to call this again
+
+    var i = this.masonry.cols;
+
+    this.masonry.colYs = [];
+        while (i--) {
+        this.masonry.colYs.push(0);
+    }
+};
+
+$.Isotope.prototype._masonryResizeChanged = function() {
+
+    var prevColCount = this.masonry.cols;
+
+    this._getCenteredMasonryColumns(); // get updated colCount
+    return (this.masonry.cols !== prevColCount);
+};
+
+$.Isotope.prototype._masonryGetContainerSize = function() {
+
+    var unusedCols = 0,
+
+    i = this.masonry.cols;
+        while (--i) { // count unused columns
+        if (this.masonry.colYs[i] !== 0) {
+            break;
+        }
+        unusedCols++;
+    }
+
+    return {
+        height: Math.max.apply(Math, this.masonry.colYs),
+        width: (this.masonry.cols - unusedCols) * this.masonry.columnWidth // fit container to columns that have been used;
+    };
+};
+</script>
 <script>
 
  

@@ -206,7 +206,8 @@ body {
 .description {
   top: 8.5em;
   left: 1em;
-  line-height: 1.3em;
+  right: 1em;
+  line-height: 1.0em;
 }
 
 .element .symbol {
