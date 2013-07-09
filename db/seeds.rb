@@ -165,7 +165,7 @@
 		end
 
 		# all classes default to undergrad, only change to grad if course num is greater than 499
-		if id[x][0..3].to_i > 499
+		if id[x][4..6].to_i > 499
 			course.update_attributes(:undergrad => false)
 		end
 	  	# set appropriate gened code filters, but only if this is a gened page
