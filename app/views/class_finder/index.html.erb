@@ -17,7 +17,7 @@
       <% @courses.size.times do |x| %>
       <div class='<%= @types[x] %>' id = '<%=@courses[x].course_code%>' data-category="noble-gas">
         <p class="number"><%= @courses[x].course_code[4..-1]%></p>
-        <h3 class="symbol"><%= @courses[x].department%></h3>
+        <h3 class="dept"><%= @courses[x].department%></h3>
         <h2 class="name"><%= @courses[x].name%></h2>
         <span hidden id="<%=@courses[x].course_code%>-info" class ="description"> <br><br><hr><br>
           <%=@courses[x].credits%> Credits.<br><br>
@@ -34,6 +34,7 @@
   <script src="./js/jquery.isotope.min.js"></script>
   <script src="./js/fake-element.js"></script>
   <script src="./js/masonry.js"></script>
+  <script src="./js/elements.js"></script>
   </body>
 </html>
 
