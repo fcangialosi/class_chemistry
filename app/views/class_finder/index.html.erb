@@ -25,7 +25,11 @@
       <p class="number"><%= @courses[x].course_code[4..-1]%></p>
       <h3 class="symbol"><%= @courses[x].department%></h3>
       <h2 class="name"><%= @courses[x].name%></h2>
-      <span hidden id="<%=@courses[x].course_code%>-info" class ="description"> <%=@courses[x].description%> </span>
+      <span hidden id="<%=@courses[x].course_code%>-info" class ="description"> <br><br><hr><br>
+        <%=@courses[x].credits%> Credits.<br><br>
+        Professor <%=prof = @courses[x].professor%> <%=if (prof == nil) then "Not Listed" end%>
+        <%profs = @courses[x].num_professors%> 
+        <%=if((profs != nil) && (profs-1 != 0)) then "and " + profs.to_s + " others" end%> <br><br> <%=@courses[x].description%> </span>
       <p class="seats">Seats Open: (<%=open = @courses[x].open_seats %><%= if(open == nil) then "N" end%>/<%=total = @courses[x].total_seats%><%= if(total ==nil) then "A" end%>)</p>
      
     </div>
