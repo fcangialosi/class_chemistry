@@ -86,7 +86,9 @@ body {
   font-family: 'Quicksand', sans-serif;
   font-size: 13px;
   line-height: 1.7em;
-  background: #1F1E1D;
+  /*background: #1F1E1D;*/
+  background-image:url('mooning.png');
+  background-repeat
   color: #FFF;
 }
 
@@ -186,6 +188,9 @@ body {
   -webkit-border-bottom-left-radius: 1.4em;
       -moz-border-radius-bottomleft: 1.4em;
           border-bottom-left-radius: 1.4em;
+  -moz-box-shadow:    3px 3px 5px 2px #443B3B;
+  -webkit-box-shadow: 3px 3px 5px 2px #443B3B;
+  box-shadow:         3px 3px 5px 2px #443B3B;
 }
 
 .element.alkali          { background: #F00; background: hsl(   192, 100%, 40%); }

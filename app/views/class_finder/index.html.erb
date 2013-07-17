@@ -5,6 +5,9 @@
     <link href='http://fonts.googleapis.com/css?family=Quicksand|Open+Sans:400,600' rel='stylesheet' type='text/css'>
     <meta charset="utf-8" />
     <title>&middot; Class Chemistry &middot;</title>
+    
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css" />
     <link href='http://fonts.googleapis.com/css?family=Fauna+One|Alegreya' rel='stylesheet' type='text/css'>
   </head>
@@ -12,21 +15,47 @@
 
 	 <h1 align="center">Class Chemistry</h1>
 
+
+<div class="tabbable tabs-below"> <!-- Only required for left/right tabs -->
+  <ul class="nav nav-pills">
+    <li class="active"><a href="#tab1" data-toggle="tab">Section 1</a></li>
+    <li><a href="#tab2" data-toggle="tab">Section 2</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab1">
+     <div id="filters" class="btn-group">
+   <button class="btn btn-primary"><a href="#" data-filter="*">show all</a></button>
+   <button class="btn btn-primary"><a href="#" data-filter=".metal">metal</a></button>
+   <button class="btn btn-primary"><a href="#" data-filter=".transition">transition</a></button>
+    <button class="btn btn-primary"><a href="#" data-filter=".noble-gas">noble gas</a></button>
+   <button class="btn btn-primary"><a href="#" data-filter=".alkali, .alkaline-earth">alkali and alkaline-earth</a></button>
+   <button class="btn btn-primary"><a href="#" data-filter=":not(.transition)">not transition</a></button>
+   <button class="btn btn-primary"><a href="#" data-filter=".metal:not(.transition)">metal but not transition</a></button>
+</div>
+    </div>
+    <div class="tab-pane" id="tab2">
+      <p>Howdy, I'm in Section 2.</p>
+    </div>
+  </div>
+</div>
+
    <div id="container" class="clickable clearfix">
     
       <% @courses.size.times do |x| %>
-      <div class='<%= @types[x] %>' id = '<%=@courses[x].course_code%>' data-category="noble-gas">
-        <p class="number"><%= @courses[x].course_code[4..-1]%></p>
-        <h3 class="dept"><%= @courses[x].department%></h3>
-        <h2 class="name"><%= @courses[x].name%></h2>
-        <span hidden id="<%=@courses[x].course_code%>-info" class ="description"> <br><br><hr><br>
-          <%=@courses[x].credits%> Credits.<br><br>
-          Professor <%=prof = @courses[x].professor%> <%=if (prof == nil) then "Not Listed" end%><%profs = @courses[x].num_professors%>
-          <%=if((profs != nil) && (profs-1 != 0)) then "and " + profs.to_s + " others" end%> <br><br>
-          <%=@courses[x].description%>
-        </span>
-        <p class="seats">Seats Open: (<%=open = @courses[x].open_seats %><%= if(open == nil) then "N" end%>/<%=total = @courses[x].total_seats%><%= if(total ==nil) then "A" end%>)</p>
-      </div>
+ 
+        <div class='<%= @types[x] %>' id = '<%=@courses[x].course_code%>' data-category="noble-gas">
+          <p class="number"><%= @courses[x].course_code[4..-1]%></p>
+          <h3 class="dept"><%= @courses[x].department%></h3>
+          <h2 class="name"><%= @courses[x].name%></h2>
+          <span hidden id="<%=@courses[x].course_code%>-info" class ="description"> <br><br><hr><br>
+            <%=@courses[x].credits%> Credits.<br><br>
+            Professor <%=prof = @courses[x].professor%> <%=if (prof == nil) then "Not Listed" end%><%profs = @courses[x].num_professors%>
+            <%=if((profs != nil) && (profs-1 != 0)) then "and " + profs.to_s + " others" end%> <br><br>
+            <%=@courses[x].description%>
+          </span>
+          <p class="seats">Seats Open: (<%=open = @courses[x].open_seats %><%= if(open == nil) then "N" end%>/<%=total = @courses[x].total_seats%><%= if(total ==nil) then "A" end%>)</p>
+        </div>
+      
       <% end %>
     </div> 
   
@@ -35,6 +64,7 @@
   <script src="./js/fake-element.js"></script>
   <script src="./js/masonry.js"></script>
   <script src="./js/elements.js"></script>
+  <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
 

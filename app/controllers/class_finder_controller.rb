@@ -2,7 +2,7 @@ class ClassFinderController < ApplicationController
   
   def index
   	@courses = []
-  	30.times do |x|
+  	50.times do |x|
   		course = Course.offset(rand(Course.count)).first
   		while(!course.undergrad)
 			course = Course.offset(rand(Course.count)).first
@@ -11,7 +11,7 @@ class ClassFinderController < ApplicationController
   	end
 
     @types = []
-    30.times do |x|
+    50.times do |x|
       num = Random.rand(1..(6+1))
       case num
         when 1 then @types.push("element alkali metal")

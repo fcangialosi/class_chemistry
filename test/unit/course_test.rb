@@ -14,26 +14,7 @@
 #  professor      :string(255)
 #  num_professors :integer
 #  undergrad      :boolean          default(TRUE)
-#  FSAW           :boolean          default(FALSE)
-#  FSAR           :boolean          default(FALSE)
-#  FSMA           :boolean          default(FALSE)
-#  FSOC           :boolean          default(FALSE)
-#  FSPW           :boolean          default(FALSE)
-#  DSHS           :boolean          default(FALSE)
-#  DSHU           :boolean          default(FALSE)
-#  DSNS           :boolean          default(FALSE)
-#  DSNL           :boolean          default(FALSE)
-#  DSSP           :boolean          default(FALSE)
-#  DVCC           :boolean          default(FALSE)
-#  DVUP           :boolean          default(FALSE)
-#  SCIS           :boolean          default(FALSE)
-#  HSorHU         :boolean          default(FALSE)
-#  HSorSP         :boolean          default(FALSE)
-#  HSorNS         :boolean          default(FALSE)
-#  HUorSP         :boolean          default(FALSE)
-#  NLorSP         :boolean          default(FALSE)
-#  HSorHUorSP     :boolean          default(FALSE)
-#  NLorNSorSP     :boolean          default(FALSE)
+#  gened_codes    :string(255)
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #

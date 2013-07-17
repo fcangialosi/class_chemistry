@@ -122,7 +122,7 @@
 	  description = doc.css('div.approved-course-text').map { |e| "#{e.text}" } 
 	  
 	  if(gened.include?(page)) # Only parse gened codes if this is a gened page
-	  	gened_codes = doc.css("div.gen-ed-codes-group").map { |e| "#{strip(e.text)}" } # cotains all the codes for a single class in the form: "GenEd: TYPE1, TYPE2, TYPE3", may have anywhere from 1 - 3 types
+	  	gened_codes = doc.css("div.gen-ed-codes-group").map { |e| "#{strip(e.text)[6..-1].delete(",")}"} # cotains all the codes for a single class in the form: "TYPE1(or) TYPE2(or) TYPE3", may have anywhere from 1 - 3 types, and may contain "or"s
 	  end
 
 	  # Create and fill courses on the database
@@ -170,66 +170,7 @@
 		end
 	  	# set appropriate gened code filters, but only if this is a gened page
 	  	if(gened.include?(page))
-	  		if gened_codes[x].include? 'FSAW'
-	  			course.update_attributes(:FSAW => true)
-	  		end
-	  		if gened_codes[x].include? 'FSAR'
-	  			course.update_attributes(:FSAR => true)
-	  		end
-	  		if gened_codes[x].include? 'FSMA'
-	  			course.update_attributes(:FSMA => true)
-	  		end
-	  		if gened_codes[x].include? 'FSOC'
-	  			course.update_attributes(:FSOC => true)
-	  		end
-	  		if gened_codes[x].include? 'FSPW'
-	  			course.update_attributes(:FSPW => true)
-	  		end
-	  		if gened_codes[x].include? 'DSHS'
-	  			course.update_attributes(:DSHS => true)
-	  		end
-	  		if gened_codes[x].include? 'DSHU'
-	  			course.update_attributes(:DSHU => true)
-	  		end
-	  		if gened_codes[x].include? 'DSNS'
-	  			course.update_attributes(:DSNS => true)
-	  		end
-	  		if gened_codes[x].include? 'DSNL'
-	  			course.update_attributes(:DSNL => true)
-	  		end
-	  		if gened_codes[x].include? 'DSSP'
-	  			course.update_attributes(:DSSP => true)
-	  		end
-	  		if gened_codes[x].include? 'DVCC'
-	  			course.update_attributes(:DVCC => true)
-	  		end
-	  		if gened_codes[x].include? 'DVUP'
-	  			course.update_attributes(:DVUP => true)
-	  		end
-	  		if gened_codes[x].include? 'SCIS'
-	  			course.update_attributes(:SCIS => true)
-	  		end
-	  		if gened_codes[x].include? 'DSHSor DSHU'
-	  			course.update_attributes(:HSorHU => true)
-	  		end
-	  		if gened_codes[x].include? 'DSHSor DSSP'
-	  			course.update_attributes(:HSorSP => true)
-	  		end
-	  		if gened_codes[x].include? 'DSHSor DSNS'
-	  			course.update_attributes(:HSorNS => true)
-	  		end
-	  		if gened_codes[x].include? 'DSHUor DSSP'
-	  			course.update_attributes(:HUorSP => true)
-	  		end
-	  		if gened_codes[x].include? 'DSNLor DSSP'
-	  			course.update_attributes(:NLorSP => true)
-	  		end
-	  		if gened_codes[x].include? 'DSHSor DSHUor DSSP'
-	  			course.update_attributes(:HSorHUorSP => true)
-	  		end
-	  		if gened_codes[x].include? 'DSNLor DSNSor DSSP'
-	  			course.update_attributes(:NLorNSorSP => true)
-	  		end
+	  		course.update_attributes(:gened_codes => "#{gened_codes[x]}")
 	  	end
 	  end
 	end
